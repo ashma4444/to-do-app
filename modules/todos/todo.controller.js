@@ -1,18 +1,34 @@
 //CRUD operations will be performed inside controller
 
+const Model = require("./todo.model");
+
 // create todo
-const create = (payload) => {};
+const create = async (payload) => {
+  //   const result = await Model.create(payload);
+  //   return result;
+
+  // OR
+  return await Model.create(payload);
+};
 
 //read one specific todo
-const getById = (id) => {};
+const getById = async (id) => {
+  return await Model.findOne({ _id: id });
+};
 
 //list all todo
-const list = () => {};
+const list = async () => {
+  return await Model.find();
+};
 
 //update todo
-const updateById = (id, payload) => {};
+const updateById = async (id, payload) => {
+  return await Model.findOneAndUpdate({ _id: id }, payload, { new: true });
+};
 
 //delete todo
-const remove = (id) => {};
+const remove = async (id) => {
+  return await Model.deleteOne({ _id: id });
+};
 
 module.exports = { create, getById, list, updateById, remove };

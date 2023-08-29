@@ -2,8 +2,14 @@ require("dotenv").config();
 
 const express = require("express");
 const indexRouter = require("./routes");
+const mongoose = require("mongoose");
 
 const app = express();
+
+//connect db
+mongoose
+  .connect(process.env.DB_URL)
+  .then(() => console.log("DATABASE CONNECTED"));
 
 // to catch request from body - enable json body --> req.body lina milcha
 app.use(express.json());

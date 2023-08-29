@@ -13,9 +13,10 @@ const todoController = require("./todo.controller");
 // create todo
 router.post("/", async (req, res, next) => {
   try {
-    const { payload } = req.body;
+    /*const { payload } = req.body;  
+    if entire object pathako chavani, but we are sending only title in body, so we can directly do req.body*/
 
-    const result = await todoController.create(payload);
+    const result = await todoController.create(req.body);
 
     res.json({ data: result, msg: "Success" });
   } catch (err) {
@@ -50,10 +51,12 @@ router.get("/", async (req, res, next) => {
 //update todo
 router.put("/:id", async (req, res, next) => {
   try {
-    const { payload } = req.body;
+    /* 
+      const { payload } = req.body; 
+    */
     const { id } = req.params;
 
-    const result = await todoController.updateById(id, payload);
+    const result = await todoController.updateById(id, req.body);
 
     res.json({ data: result, msg: "Success" });
   } catch (err) {

@@ -10,6 +10,7 @@ const commonSchema = require("../../utils/commonSchema");
 const SubtaskSchema = new Schema({
   title: String,
   status: { type: String, enum: ["pending", "completed"], default: "pending" },
+  //   todo: { type: isObjectIdOrHexString, ref: "Todo" }, // foreign key
   ...commonSchema, //destructure
 });
 

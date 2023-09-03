@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const todoController = require("./todo.controller");
+const subtaskController = require("./subtask.controller");
 
 // router.get("/", (req, res, next) => {
 //   //   res.json({ data: "Hello", msg: "Success", status: 200 });
@@ -10,13 +10,16 @@ const todoController = require("./todo.controller");
 //   }
 // });
 
-// create todo
+// create subtask
 router.post("/", async (req, res, next) => {
   try {
-    /*const { payload } = req.body;  
-    if entire object pathako chavani, but we are sending only title in body, so we can directly do req.body*/
+    // const { payload } = req.body;
 
-    const result = await todoController.create(req.body);
+    const { todo, title } = req.body;
+
+    if (!todo || !title) throw new Error("Title or Todo is required");
+
+    const result = await subtaskController.create(req.body);
 
     res.json({ data: result, msg: "Success" });
   } catch (err) {
@@ -24,12 +27,12 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-//read one specific todo
+//read one specific subtask
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const result = await todoController.getById(id);
+    const result = await subtaskController.getById(id);
 
     res.json({ data: result, msg: "Success" });
   } catch (err) {
@@ -37,10 +40,10 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-//list all todo
+//list all subtask
 router.get("/", async (req, res, next) => {
   try {
-    const result = await todoController.list();
+    const result = await subtaskController.list();
 
     res.json({ data: result, msg: "Success" });
   } catch (err) {
@@ -48,15 +51,16 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-//update todo
-router.put("/:id", async (req, res, next) => {
+//update subtask
+router.patch("/:id", async (req, res, next) => {
   try {
-    /* 
-      const { payload } = req.body; 
-    */
+    // const { payload } = req.body;
     const { id } = req.params;
+    const { status } = req.body;
 
-    const result = await todoController.updateById(id, req.body);
+    if (!status) throw new Error("Status is required");
+
+    const result = await subtaskController.updateById(id, { status });
 
     res.json({ data: result, msg: "Success" });
   } catch (err) {
@@ -64,12 +68,12 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-//delete todo
+//delete subtask
 router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const result = await todoController.remove(id);
+    const result = await subtaskController.remove(id);
 
     res.json({ data: result, msg: "Success" });
   } catch (err) {

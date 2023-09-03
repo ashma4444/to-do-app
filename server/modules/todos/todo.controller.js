@@ -8,7 +8,8 @@ const create = async (payload) => {
   //   return result;
 
   // OR
-  return await Model.create(payload);
+  const { title } = payload;
+  return await Model.create({ title });
 };
 
 //read one specific todo
@@ -18,12 +19,24 @@ const getById = async (id) => {
 
 //list all todo
 const list = async () => {
-  return await Model.find();
+  // return await Model.find();
+  return await Model.aggregate([
+    {
+      $lookup: {
+        from: "subtasks",
+        localField: "_id",
+        foreignField: "todo",
+        as: "subtasks",
+      },
+    },
+  ]);
 };
 
 //update todo
 const updateById = async (id, payload) => {
-  return await Model.findOneAndUpdate({ _id: id }, payload, { new: true });
+  const { status } = payload;
+  status = status ? "completed" : "pending";
+  return await Model.findOneAndUpdate({ _id: id }, { status }, { new: true });
 };
 
 //delete todo

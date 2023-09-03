@@ -5,12 +5,13 @@
 //OR
 
 const { Schema, model } = require("mongoose");
+const { ObjectId } = require("mongoose").Schema;
 const commonSchema = require("../../utils/commonSchema");
 
 const SubtaskSchema = new Schema({
-  title: String,
+  title: { type: String, required: true },
   status: { type: String, enum: ["pending", "completed"], default: "pending" },
-  //   todo: { type: isObjectIdOrHexString, ref: "Todo" }, // foreign key
+  todo: { type: ObjectId, ref: "Todo" }, // foreign key - ref = "Todo" --> schema
   ...commonSchema, //destructure
 });
 
@@ -19,4 +20,4 @@ const SubtaskSchema = new Schema({
 // module.exports = Subtask;
 
 // OR
-module.exports = new model("Subtask", SubtaskSchema);
+module.exports = model("Subtask", SubtaskSchema);

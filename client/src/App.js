@@ -5,7 +5,7 @@ function App() {
     // fragments
     <>
       <div className="App">hello world</div>
-      <Car />
+      <Car color="red" />
     </>
   );
 }

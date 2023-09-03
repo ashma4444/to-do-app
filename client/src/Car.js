@@ -10,7 +10,10 @@ function Car(props) {
   return (
     <>
       <div>Car is of color {props.color}</div>
-      <button onClick={() => shoot("ashma")}>Click me</button>
+      <input id="name" />
+      <button onClick={() => shoot(document.getElementById("name").value)}>
+        Click me
+      </button>
     </>
   );
 }

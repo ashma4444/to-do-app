@@ -19,10 +19,11 @@ function HookDemo() {
     url: "https://jsonplaceholder.typicode.com/todos/1",
   });
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <>
+      {/* {data.title} */}
       <div>HookDemo</div>
 
       <h1>Color : {color}</h1>

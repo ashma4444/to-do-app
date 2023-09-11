@@ -4,17 +4,22 @@
 // import Form from "react-bootstrap/Form";
 // import InputGroup from "react-bootstrap/InputGroup";
 // import AlertMsg from "./components/AlertMsg";
-import { Container, Col, Row } from "react-bootstrap";
+import "./App.css";
+import { Container, Col, Row, Navbar } from "react-bootstrap";
+import CustomHookDemo from "./CustomHookDemo";
+import HookDemo from "./HookDemo";
 import InputGroupComp from "./components/InputGroupComp";
 import ListTask from "./components/ListTask";
+import NavBar from "./components/Navbar";
 import Title from "./components/Title";
 import Toaster from "./components/Toaster";
-import HookDemo from "./HookDemo";
+import { useThemeContext } from "./contexts/ThemeContext";
 
 function App() {
+  const { theme } = useThemeContext();
   return (
     // fragments
-    <>
+    <div className={`${theme}`}>
       {/* <ColorSchemesExample />
       <div className="App">hello world</div>
       <Car color="red" />
@@ -25,6 +30,7 @@ function App() {
         <Form.Control aria-label="Amount (to the nearest dollar)" />
         <Button variant="success">Button</Button>
       </InputGroup> */}
+      <NavBar />
 
       <Toaster />
       <Container>
@@ -44,7 +50,9 @@ function App() {
       </Container>
 
       <HookDemo />
-    </>
+
+      <CustomHookDemo />
+    </div>
   );
 }
 

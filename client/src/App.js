@@ -1,37 +1,29 @@
-// import Car from "./Car";
-// import ColorSchemesExample from "./Navbar";
-// import { Button } from "react-bootstrap";
-// import Form from "react-bootstrap/Form";
-// import InputGroup from "react-bootstrap/InputGroup";
 // import AlertMsg from "./components/AlertMsg";
 import "./App.css";
-import { Container, Col, Row, Navbar } from "react-bootstrap";
-import CustomHookDemo from "./CustomHookDemo";
-import HookDemo from "./HookDemo";
+import { Container, Col, Row } from "react-bootstrap";
 import InputGroupComp from "./components/InputGroupComp";
 import ListTask from "./components/ListTask";
 import NavBar from "./components/Navbar";
 import Title from "./components/Title";
 import Toaster from "./components/Toaster";
 import { useThemeContext } from "./contexts/ThemeContext";
+import { useEffect, useState } from "react";
+import useApi from "./hooks/useApi";
 
 function App() {
   const { theme } = useThemeContext();
+  const { data, error, loading, list } = useApi();
+
+  useEffect(() => {
+    list();
+  }, []);
+
+  console.log("----" + data);
+
   return (
     // fragments
     <div className={`${theme}`}>
-      {/* <ColorSchemesExample />
-      <div className="App">hello world</div>
-      <Car color="red" />
-      <Button variant="outline-primary">Primary</Button>
-
-      <InputGroup className="mb-3 w-50">
-        <InputGroup.Text>$</InputGroup.Text>
-        <Form.Control aria-label="Amount (to the nearest dollar)" />
-        <Button variant="success">Button</Button>
-      </InputGroup> */}
       <NavBar />
-
       <Toaster />
       <Container>
         <Row>
@@ -43,15 +35,11 @@ function App() {
               buttonName="Add the task"
             />
 
-            <ListTask tasks="Do Laundry" />
+            <ListTask tasks={tasks} />
             {/* <AlertMsg variant="danger" msg="Error found" /> */}
           </Col>
         </Row>
       </Container>
-
-      <HookDemo />
-
-      <CustomHookDemo />
     </div>
   );
 }

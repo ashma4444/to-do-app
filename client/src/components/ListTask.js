@@ -5,38 +5,9 @@ import SubtaskList from "./SubtaskList";
 import TaskCompleted from "./TaskCompleted";
 
 function ListTask({ tasks }) {
-  tasks = [
-    {
-      _id: 0,
-      title: "Task 1",
-      status: "completed",
-      subtasks: [
-        { _id: 1, title: "subtask2", status: "completed" },
-        { _id: 2, title: "subtask2", status: "pending" },
-      ],
-    },
-    {
-      _id: 1,
-      title: "Task 2",
-      status: "pending",
-      subtasks: [{ _id: 3, title: "subtask2", status: "pending" }],
-    },
-    {
-      _id: 2,
-      title: "Task 3",
-      status: "pending",
-      subtasks: [{ _id: 4, title: "subtask2", status: "pending" }],
-    },
-    {
-      _id: 3,
-      title: "Task 4",
-      status: "pending",
-      subtasks: [],
-    },
-  ];
   return (
     <Accordion defaultActiveKey="0">
-      {tasks && tasks.length ? (
+      {tasks & (tasks.length > 0) ? (
         tasks.map((task, index) => {
           return (
             <Accordion.Item key={task._id} eventKey={index}>
@@ -47,7 +18,7 @@ function ListTask({ tasks }) {
                 >
                   <Form.Check // prettier-ignore
                     type="checkbox"
-                    label={task.title || "Label"}
+                    label={`Task ${index + 1}: ${task.title}` || "Label"}
                     defaultChecked={task.status === "completed" ? true : false}
                   />
                   <TaskCompleted total={task.subtasks.length} completed={0} />

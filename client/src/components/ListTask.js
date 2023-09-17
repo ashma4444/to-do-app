@@ -3,11 +3,20 @@ import AlertMsg from "./AlertMsg";
 import InputGroupComp from "./InputGroupComp";
 import SubtaskList from "./SubtaskList";
 import TaskCompleted from "./TaskCompleted";
+import { URLS } from "../constants";
+import useApi from "../hooks/useApi";
 
 function ListTask({ tasks }) {
+  const { updateById } = useApi();
+  const handleChange = async (status, id) => {
+    const payload = {
+      status: status ? "completed" : "pending",
+    };
+    await updateById({ url: URLS.TODOS, id, payload });
+  };
   return (
     <Accordion defaultActiveKey="0">
-      {tasks & (tasks.length > 0) ? (
+      {tasks && tasks.length > 0 ? (
         tasks.map((task, index) => {
           return (
             <Accordion.Item key={task._id} eventKey={index}>
@@ -20,6 +29,9 @@ function ListTask({ tasks }) {
                     type="checkbox"
                     label={`Task ${index + 1}: ${task.title}` || "Label"}
                     defaultChecked={task.status === "completed" ? true : false}
+                    onChange={(e) => {
+                      handleChange(e.target.checked, task?._id);
+                    }}
                   />
                   <TaskCompleted total={task.subtasks.length} completed={0} />
                 </Form>
@@ -33,6 +45,7 @@ function ListTask({ tasks }) {
                         key={subtask._id}
                         subtaskTitle={subtask?.title}
                         status={subtask?.status}
+                        subtaskId={subtask._id}
                       />
                     );
                   })
@@ -44,6 +57,8 @@ function ListTask({ tasks }) {
                   label="Add new subtask?"
                   placeholder="Eg: Do Laundry"
                   buttonName="Add the task"
+                  url={URLS.SUBTASKS}
+                  todoId={task?._id}
                 />
               </Accordion.Body>
             </Accordion.Item>

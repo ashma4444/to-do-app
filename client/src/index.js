@@ -3,13 +3,16 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ThemeContextProvider from "./contexts/ThemeContext";
+import ToastContextProvider from "./contexts/ToastContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ThemeContextProvider>
-      <App />
-    </ThemeContextProvider>
+    <ToastContextProvider>
+      <ThemeContextProvider>
+        <App />
+      </ThemeContextProvider>
+    </ToastContextProvider>
   </React.StrictMode>
 );
 

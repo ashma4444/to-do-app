@@ -60,7 +60,7 @@ router.patch("/:id", async (req, res, next) => {
 
     if (!status) throw new Error("Status is required");
 
-    const result = await subtaskController.updateById(id, { status });
+    const result = await subtaskController.updateById(id, req.body);
 
     res.json({ data: result, msg: "Success" });
   } catch (err) {

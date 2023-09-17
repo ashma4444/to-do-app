@@ -23,9 +23,9 @@ const list = async () => {
 
 //update subtask
 const updateById = async (id, payload) => {
-  const { status } = payload;
-  status = status ? "completed" : "pending";
-  return await Model.findOneAndUpdate({ _id: id }, { status }, { new: true });
+  // const { status } = payload;
+  // status = status ? "completed" : "pending";
+  return await Model.findOneAndUpdate({ _id: id }, payload, { new: true });
 };
 
 //delete subtask

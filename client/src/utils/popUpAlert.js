@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-function PopupAlert({
+async function PopupAlert({
   title,
   text,
   icon,
@@ -9,7 +9,7 @@ function PopupAlert({
   successMsg,
   successIcon,
 }) {
-  Swal.fire({
+  const result = await Swal.fire({
     title: title || "Are you sure?",
     text: text || "You won't be able to revert this!",
     icon: icon || "warning",
@@ -17,16 +17,15 @@ function PopupAlert({
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: confirmButtonText || "Yes, delete it!",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      // DB operations
-      Swal.fire(
-        successTitle || "Deleted!",
-        successMsg || "File had been deleted",
-        successIcon || "success"
-      );
-    }
   });
+  if (!result.isConfirmed) return false;
+
+  Swal.fire(
+    successTitle || "Deleted!",
+    successMsg || "File had been deleted",
+    successIcon || "success"
+  );
+  return true;
 }
 
 export default PopupAlert;

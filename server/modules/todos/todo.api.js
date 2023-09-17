@@ -53,9 +53,9 @@ router.patch("/:id", async (req, res, next) => {
   try {
     // const { payload } = req.body;
     const { id } = req.params;
-    const { status } = req.body;
+    // const { status } = req.body;
 
-    const result = await todoController.updateById(id, { status });
+    const result = await todoController.updateById(id, req.body);
 
     res.json({ data: result, msg: "Success" });
   } catch (err) {

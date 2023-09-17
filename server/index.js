@@ -3,6 +3,7 @@ const cors = require("cors");
 const express = require("express");
 const indexRouter = require("./routes");
 const mongoose = require("mongoose");
+const Replicate = require("replicate");
 
 const app = express();
 
@@ -32,3 +33,50 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);
 });
+
+// test
+
+// const replicate = new Replicate({
+//   // get your token from https://replicate.com/account
+//   auth: process.env.REPLICATE_API_TOKEN,
+// });
+
+// const runFunc = async () => {
+//   const output = await replicate.run(
+//     "stability-ai/stable-diffusion:27b93a2413e7f36cd83da926f3656280b2931564ff050bf9575f1fdf9bcd7478",
+//     {
+//       input: {
+//         prompt: "painting of a cat by andy warhol",
+//       },
+//     }
+//   );
+//   console.log(output);
+// };
+
+// runFunc();
+
+// const generateImage = async () => {
+//   const output = await replicate.run(
+//     "stability-ai/stable-diffusion:27b93a2413e7f36cd83da926f3656280b2931564ff050bf9575f1fdf9bcd7478",
+//     {
+//       input: {
+//         prompt: "painting of a cat by andy warhol",
+//       },
+//     }
+//   );
+//   return output;
+// };
+
+// const generateMultipleImages = async (count) => {
+//   const imagePromises = [];
+//   for (let i = 0; i < count; i++) {
+//     imagePromises.push(generateImage());
+//   }
+
+//   const images = await Promise.all(imagePromises);
+//   console.log(images);
+// };
+
+// Adjust the number of images you want to generate
+// const numberOfImages = 5;
+// generateMultipleImages(numberOfImages);

@@ -9,6 +9,7 @@ import InputGroupComp from "./components/InputGroupComp";
 import ListTask from "./components/ListTask";
 import NavBar from "./components/Navbar";
 import Loading from "./components/Loading";
+import Practice from "./components/Practice";
 import Title from "./components/Title";
 import Toaster from "./global/Toaster";
 import { useThemeContext } from "./contexts/ThemeContext";
@@ -33,26 +34,27 @@ function App() {
 
   return (
     // fragments
-    <div className={`${theme}`}>
-      <NavBar />
-      <Container>
-        <Row>
-          <Col md={{ span: 6, offset: 3 }}>
-            <Title title="TODO APP" />
-            <InputGroupComp
-              label="Add new Todo?"
-              placeholder="Eg: Do Laundry"
-              buttonName="Add the task"
-              url={URLS.TODOS}
-            />
+    // <div className={`${theme}`}>
+    //   <NavBar />
+    //   <Container>
+    //     <Row>
+    //       <Col md={{ span: 6, offset: 3 }}>
+    //         <Title title="TODO APP" />
+    //         <InputGroupComp
+    //           label="Add new Todo?"
+    //           placeholder="Eg: Do Laundry"
+    //           buttonName="Add the task"
+    //           url={URLS.TODOS}
+    //         />
 
-            <ListTask tasks={tasks} />
-            {/* <AlertMsg variant="danger" msg="Error found" /> */}
-          </Col>
-        </Row>
-      </Container>
-      <Toaster />
-    </div>
+    //         <ListTask tasks={tasks} />
+    //         {/* <AlertMsg variant="danger" msg="Error found" /> */}
+    //       </Col>
+    //     </Row>
+    //   </Container>
+    //   <Toaster />
+    // </div>
+    <Practice />
   );
 }
 

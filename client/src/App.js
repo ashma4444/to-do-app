@@ -35,31 +35,31 @@ function App() {
 
   return (
     // fragments
-    // <div className={`${theme}`}>
-    //   <NavBar />
-    //   <Container>
-    //     <Row>
-    //       <Col md={{ span: 6, offset: 3 }}>
-    //         <Title title="TODO APP" />
-    //         <InputGroupComp
-    //           label="Add new Todo?"
-    //           placeholder="Eg: Do Laundry"
-    //           buttonName="Add the task"
-    //           url={URLS.TODOS}
-    //         />
+    <div className={`${theme}`}>
+      <NavBar />
+      <Container>
+        <Row>
+          <Col md={{ span: 6, offset: 3 }}>
+            <Title title="TODO APP" />
+            <InputGroupComp
+              label="Add new Todo?"
+              placeholder="Eg: Do Laundry"
+              buttonName="Add the task"
+              url={URLS.TODOS}
+            />
 
-    //         <ListTask tasks={tasks} />
-    //         {/* <AlertMsg variant="danger" msg="Error found" /> */}
-    //       </Col>
-    //     </Row>
-    //   </Container>
-    //   <Toaster />
-    // </div>
+            <ListTask tasks={tasks} />
+            {/* <AlertMsg variant="danger" msg="Error found" /> */}
+          </Col>
+        </Row>
+      </Container>
+      <Toaster />
+    </div>
 
-    <>
-      <Practice />
-      <UpdateParentFromChild />
-    </>
+    // <>
+    //   <Practice />
+    //   <UpdateParentFromChild />
+    // </>
   );
 }
 

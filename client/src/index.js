@@ -4,13 +4,16 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ThemeContextProvider from "./contexts/ThemeContext";
 import ToastContextProvider from "./contexts/ToastContext";
+import APIContextProvider from "./contexts";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ToastContextProvider>
       <ThemeContextProvider>
-        <App />
+        <APIContextProvider>
+          <App />
+        </APIContextProvider>
       </ThemeContextProvider>
     </ToastContextProvider>
   </React.StrictMode>

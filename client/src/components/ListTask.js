@@ -4,10 +4,10 @@ import InputGroupComp from "./InputGroupComp";
 import SubtaskList from "./SubtaskList";
 import TaskCompleted from "./TaskCompleted";
 import { URLS } from "../constants";
-import useApi from "../hooks/useApi";
+import { useAPIContext } from "../contexts";
 
 function ListTask({ tasks }) {
-  const { updateById } = useApi();
+  const { updateById } = useAPIContext();
   const handleChange = async (status, id) => {
     const payload = {
       status: status ? "completed" : "pending",
@@ -28,7 +28,7 @@ function ListTask({ tasks }) {
                   <Form.Check // prettier-ignore
                     type="checkbox"
                     label={`Task ${index + 1}: ${task.title}` || "Label"}
-                    defaultChecked={task.status === "completed" ? true : false}
+                    checked={task.status === "completed" ? true : false}
                     onChange={(e) => {
                       handleChange(e.target.checked, task?._id);
                     }}

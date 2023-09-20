@@ -77,6 +77,6 @@ app.listen(port, () => {
 //   console.log(images);
 // };
 
-// Adjust the number of images you want to generate
+// // Adjust the number of images you want to generate
 // const numberOfImages = 5;
 // generateMultipleImages(numberOfImages);

@@ -1,6 +1,7 @@
 //CRUD operations will be performed inside controller
 
 const Model = require("./todo.model");
+const subtaskModel = require("../subtasks/subtask.model");
 
 // create todo
 const create = async (payload) => {
@@ -34,8 +35,21 @@ const list = async () => {
 
 //update todo
 const updateById = async (id, payload) => {
-  // const { status } = payload;
+  const { status } = payload;
   // status = status ? "completed" : "pending";
+
+  if (status === "completed") {
+    const result = await subtaskModel.find({ todo: id });
+    result.map(async (subtask) => {
+      await subtaskModel.findOneAndUpdate(
+        { _id: subtask?._id },
+        { status: "completed" },
+        {
+          new: true,
+        }
+      );
+    });
+  }
   return await Model.findOneAndUpdate({ _id: id }, payload, { new: true });
 };
 

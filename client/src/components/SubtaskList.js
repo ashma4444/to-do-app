@@ -2,11 +2,11 @@ import { FaTrashAlt } from "react-icons/fa";
 import { Form } from "react-bootstrap";
 import React from "react";
 import PopupAlert from "../utils/popUpAlert";
-import useApi from "../hooks/useApi";
+import { useAPIContext } from "../contexts";
 import { URLS } from "../constants";
 
 function SubtaskList({ subtaskTitle, status, subtaskId }) {
-  const { deleteById, updateById } = useApi();
+  const { deleteById, updateById } = useAPIContext();
   const deleteSubTask = async () => {
     const result = await PopupAlert({ title: "Are you ready?" });
 
@@ -27,7 +27,7 @@ function SubtaskList({ subtaskTitle, status, subtaskId }) {
       <Form className="d-flex align-items-center justify-content-between">
         <Form.Check // prettier-ignore
           type="checkbox"
-          defaultChecked={status === "completed" ? true : false}
+          checked={status === "completed" ? true : false}
           label={subtaskTitle}
           onChange={(e) => {
             handleChange(e.target.checked);

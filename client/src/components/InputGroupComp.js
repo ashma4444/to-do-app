@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Form, InputGroup, Button } from "react-bootstrap";
-import useApi from "../hooks/useApi";
-import { URLS } from "../constants";
 import Loading from "./Loading";
+import { useAPIContext } from "../contexts";
 
 function InputGroupComp({ label, buttonName, placeholder, url, todoId }) {
-  const { error, loading, create } = useApi();
+  const { error, loading, create } = useAPIContext();
   // const [payload, setPayload] = useState({});
   const [title, setTitle] = useState("");
 

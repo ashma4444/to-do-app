@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 function Practice() {
   const [cities, setCities] = useState([]);
+  const [userData, setUserData] = useState({ email: "", password: "" });
+  const nameRef = useRef(null);
 
   const countries = [
     { name: "Nepal", cities: ["Kathmandu", "Lalitpur", "Bhaktapur"] },
@@ -19,6 +21,17 @@ function Practice() {
     } else {
       document.getElementById("select2").style.display = "none";
     }
+  };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+
+    console.log(userData);
+
+    setUserData({ email: "", password: "" });
+
+    const name = nameRef.current.value;
+    console.log(name);
   };
   return (
     <>
@@ -58,6 +71,37 @@ function Practice() {
           })}
         </select>
       </div>
+
+      <hr />
+
+      <form>
+        {/* controlled form example */}
+
+        <input
+          type="email"
+          value={userData?.email}
+          onChange={(e) => {
+            setUserData((prevData) => {
+              return { ...prevData, email: e.target.value };
+            });
+          }}
+        />
+        <input
+          type="password"
+          value={userData?.password}
+          onChange={(e) => {
+            setUserData((prevData) => {
+              return { ...prevData, password: e.target.value };
+            });
+          }}
+        />
+
+        {/* uncontrolled form example */}
+        <input type="text" ref={nameRef} />
+        <button onClick={(e) => submitForm(e)}>Submit</button>
+      </form>
+
+      <hr />
     </>
   );
 }
